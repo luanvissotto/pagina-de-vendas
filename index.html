@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoostSell — Plataforma de Vendas para Produtos Digitais</title>
+  <meta name="description"
+    content="Venda seus produtos digitais com checkout de alta conversão, área de membros e pagamentos integrados. Comece grátis na BoostSell.">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="nav-brand">BOOST<span style="color:var(--primary)">SELL</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#funcionalidades">Funcionalidades</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#cadastro" class="nav-cta">Criar conta grátis</a>
+      <button class="mobile-toggle" id="mobile-toggle"
+        onclick="document.getElementById('nav-links').classList.toggle('open')">☰</button>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="dot"></span> Plataforma #1 do Brasil</div>
+        <h1>Venda seus <span class="highlight">produtos digitais</span> sem complicação</h1>
+        <p class="hero-sub">Crie sua loja, configure seu checkout de alta conversão e receba pagamentos via PIX, cartão
+          e boleto. Tudo em um único lugar.</p>
+        <div class="hero-actions">
+          <button class="btn-cta" onclick="document.getElementById('cadastro').scrollIntoView({behavior:'smooth'})">
+            Criar minha conta grátis
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+          <button class="btn-outline"
+            onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver como
+            funciona</button>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Compra 100% segura
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            7 dias de garantia
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            Acesso imediato
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="stats-card">
+          <div class="stats-header">
+            <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M8 17V13M12 17V7M16 17V11" />
+              </svg>Dashboard de Vendas</h3>
+            <div class="stats-live"><span class="dot"></span> Ao vivo</div>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vendas hoje</span>
+            <span class="stat-value green" id="vendas-hoje">R$ 12.480</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Conversão</span>
+            <span class="stat-value purple">8.7%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Produtos ativos</span>
+            <span class="stat-value">34</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Alunos</span>
+            <span class="stat-value">2.841</span>
+          </div>
+          <div class="stats-chart" id="stats-chart"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SOCIAL PROOF ═══ -->
+  <section class="social-proof">
+    <div class="social-proof-inner">
+      <div class="proof-stat fade-up">
+        <div class="proof-num" data-target="50000" data-prefix="">50.000+</div>
+        <div class="proof-label">Produtores ativos</div>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat fade-up">
+        <div class="proof-num">R$ 200M+</div>
+        <div class="proof-label">Em vendas processadas</div>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat fade-up">
+        <div class="proof-num">99.9%</div>
+        <div class="proof-label">Uptime garantido</div>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-stat fade-up">
+        <div class="proof-num">4.9 ★</div>
+        <div class="proof-label">Avaliação dos clientes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMO FUNCIONA ═══ -->
+  <section class="how-it-works" id="como-funciona">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.09 6.26L20.18 10l-6.09 1.74L12 18l-2.09-6.26L3.82 10l6.09-1.74z" />
+            <path d="M20 7l.8 2.4L23.2 10l-2.4.6L20 13l-.8-2.4L16.8 10l2.4-.6z" opacity=".5" />
+          </svg> Simples e rápido</div>
+        <h2 class="section-title">Como funciona a BoostSell</h2>
+        <p class="section-sub">Em 3 passos simples você já está vendendo seus produtos digitais para todo o Brasil.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-num">1</div>
+          <h3>Cadastre seu produto</h3>
+          <p>Faça upload do seu curso, e-book, mentoria ou qualquer produto digital. Configure preço, descrição e
+            checkout.</p>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-num">2</div>
+          <h3>Compartilhe o link</h3>
+          <p>Copie o link de vendas e divulgue nas redes sociais, WhatsApp, e-mail ou onde preferir. Simples assim.</p>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-num">3</div>
+          <h3>Receba seus pagamentos</h3>
+          <p>As vendas caem direto na sua conta. PIX, cartão de crédito e boleto. Saque quando quiser.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FUNCIONALIDADES ═══ -->
+  <section class="features" id="funcionalidades">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+            <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+          </svg> Funcionalidades</div>
+        <h2 class="section-title">Tudo que você precisa para vender online</h2>
+        <p class="section-sub">Ferramentas profissionais para maximizar suas vendas e gerenciar seu negócio digital.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card fade-up">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+            </svg></div>
+          <h3>Checkout de alta conversão</h3>
+          <p>Página de pagamento otimizada com design responsivo, upsell e order bump para aumentar seu ticket médio.
+          </p>
+        </div>
+        <div class="feat-card fade-up">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c0 1.1 2.69 3 6 3s6-1.9 6-3v-5" />
+            </svg></div>
+          <h3>Área de membros</h3>
+          <p>Entregue cursos e conteúdos com player de vídeo seguro, certificados automáticos e progresso do aluno.</p>
+        </div>
+        <div class="feat-card fade-up">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
+              <rect x="7" y="8" width="10" height="8" rx="2" />
+              <path d="M9 12h6M12 9v6" />
+            </svg></div>
+          <h3>Checkout Builder</h3>
+          <p>Personalize sua página de vendas com arrasta e solta. Sem código, sem complicação. 100% visual.</p>
+        </div>
+        <div class="feat-card fade-up">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" />
+              <path d="M1 10h22" />
+            </svg></div>
+          <h3>PIX + Cartão + Boleto</h3>
+          <p>Aceite todos os meios de pagamento. PIX com aprovação instantânea e parcelamento em até 12x.</p>
+        </div>
+        <div class="feat-card fade-up">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+            </svg></div>
+          <h3>Programa de afiliados</h3>
+          <p>Crie seu exército de vendedores. Defina comissões, acompanhe vendas e pague automaticamente.</p>
+        </div>
+        <div class="feat-card fade-up">
+          <div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              <polyline points="17 6 23 6 23 12" />
+            </svg></div>
+          <h3>Recuperação de vendas</h3>
+          <p>Recupere carrinhos abandonados com e-mails e mensagens automáticas. Aumente até 30% suas vendas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DEPOIMENTOS ═══ -->
+  <section class="testimonials" id="depoimentos">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg> Depoimentos</div>
+        <h2 class="section-title">Quem usa, recomenda</h2>
+        <p class="section-sub">Veja o que nossos produtores falam sobre a experiência com a BoostSell.</p>
+      </div>
+      <div class="test-grid">
+        <div class="test-card fade-up">
+          <div class="test-stars" style="color:var(--primary)">★★★★★</div>
+          <p class="test-text">"Migrei da concorrência e minhas vendas aumentaram 40%. O checkout é absurdamente bom e a
+            taxa de conversão subiu muito."</p>
+          <div class="test-author">
+            <div class="test-avatar">RL</div>
+            <div>
+              <div class="test-name">Rafael Lima</div>
+              <div class="test-role">Produtor de cursos online</div>
+              <div class="test-result">+R$ 85.000/mês em vendas</div>
+            </div>
+          </div>
+        </div>
+        <div class="test-card fade-up">
+          <div class="test-stars" style="color:var(--primary)">★★★★★</div>
+          <p class="test-text">"A área de membros é impecável. Meus alunos amam a experiência e o suporte da BoostSell é
+            incrível. Recomendo!"</p>
+          <div class="test-author">
+            <div class="test-avatar">CS</div>
+            <div>
+              <div class="test-name">Camila Santos</div>
+              <div class="test-role">Mentora de negócios</div>
+              <div class="test-result">+2.300 alunos ativos</div>
+            </div>
+          </div>
+        </div>
+        <div class="test-card fade-up">
+          <div class="test-stars" style="color:var(--primary)">★★★★★</div>
+          <p class="test-text">"O programa de afiliados mudou meu jogo. Tenho mais de 200 afiliados vendendo meu curso
+            todos os dias. É impressionante."</p>
+          <div class="test-author">
+            <div class="test-avatar">MA</div>
+            <div>
+              <div class="test-name">Marcos Almeida</div>
+              <div class="test-role">Infoprodutor</div>
+              <div class="test-result">+R$ 150.000/mês em vendas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CADASTRO / LOGIN ═══ -->
+  <section class="signup-section" id="cadastro">
+    <div class="container">
+      <div class="signup-wrapper">
+        <div class="signup-info">
+          <div class="section-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+              <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+            </svg> Comece agora</div>
+          <h2 class="section-title" style="color:var(--white)">Crie sua conta gratuita e comece a vender hoje</h2>
+          <p style="color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:2rem">Sem cartão de crédito. Sem taxa de
+            adesão. Crie sua conta em segundos e tenha acesso a todas as ferramentas para vender seus produtos digitais.
+          </p>
+          <div class="signup-benefits">
+            <div class="benefit-item"><span class="benefit-check">✓</span> Checkout de alta conversão</div>
+            <div class="benefit-item"><span class="benefit-check">✓</span> PIX, Cartão e Boleto integrados</div>
+            <div class="benefit-item"><span class="benefit-check">✓</span> Área de membros inclusa</div>
+            <div class="benefit-item"><span class="benefit-check">✓</span> Dashboard completo de vendas</div>
+            <div class="benefit-item"><span class="benefit-check">✓</span> Programa de afiliados</div>
+            <div class="benefit-item"><span class="benefit-check">✓</span> Suporte 24h por e-mail</div>
+          </div>
+        </div>
+        <div class="signup-box" id="auth-box">
+          <div class="auth-tabs">
+            <button class="auth-tab active" onclick="switchTab('signup')" id="tab-signup">Criar conta</button>
+            <button class="auth-tab" onclick="switchTab('login')" id="tab-login">Entrar</button>
+          </div>
+          <!-- SIGNUP FORM -->
+          <form class="auth-form" id="form-signup" onsubmit="fazerCadastro(event)">
+            <div class="auth-field">
+              <label>Nome completo</label>
+              <input type="text" id="signup-nome" placeholder="Seu nome" required>
+            </div>
+            <div class="auth-field">
+              <label>E-mail</label>
+              <input type="email" id="signup-email" placeholder="seu@email.com" required>
+            </div>
+            <div class="auth-field">
+              <label>Senha</label>
+              <input type="password" id="signup-senha" placeholder="Mínimo 6 caracteres" required minlength="6">
+            </div>
+            <button type="submit" class="btn-auth" id="btn-signup">Criar minha conta grátis</button>
+            <p class="auth-terms">Ao criar sua conta, você concorda com nossos <a href="#">Termos de Uso</a> e <a
+                href="#">Política de Privacidade</a>.</p>
+          </form>
+          <!-- LOGIN FORM -->
+          <form class="auth-form" id="form-login" style="display:none" onsubmit="fazerLogin(event)">
+            <div class="auth-field">
+              <label>E-mail</label>
+              <input type="email" id="login-email" placeholder="seu@email.com" required>
+            </div>
+            <div class="auth-field">
+              <label>Senha</label>
+              <input type="password" id="login-senha" placeholder="Sua senha" required>
+            </div>
+            <button type="submit" class="btn-auth" id="btn-login">Entrar no painel</button>
+            <p class="auth-terms"><a href="#">Esqueci minha senha</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01" />
+          </svg> FAQ</div>
+        <h2 class="section-title">Perguntas frequentes</h2>
+        <p class="section-sub">Tire suas dúvidas sobre a plataforma BoostSell.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Preciso pagar algo para começar a usar?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Não! A BoostSell possui um plano gratuito para você começar a vender imediatamente.
+              Cobramos apenas uma pequena taxa por venda realizada. Você só paga quando vende.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Quais formas de pagamento são aceitas?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Aceitamos PIX (aprovação instantânea), cartão de crédito (parcelamento em até 12x),
+              boleto bancário e cartão de débito. Tudo integrado sem necessidade de configuração extra.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Como funciona o saque do dinheiro?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Você pode sacar suas vendas diretamente para sua conta bancária. O prazo de
+              liberação varia de 2 a 30 dias dependendo do método de pagamento usado pelo comprador.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Posso vender qualquer tipo de produto digital?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Sim! Cursos online, e-books, mentorias, templates, softwares, comunidades e
+              qualquer outro produto digital. A BoostSell se adapta ao seu modelo de negócio.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>A plataforma oferece área de membros?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Sim! Nossa área de membros possui player de vídeo seguro, acompanhamento de
+              progresso, certificados automáticos e design personalizado para seus alunos.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Tem programa de afiliados?</span>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Sim! Com o plano Pro ou superior, você pode criar seu programa de afiliados,
+              definir comissões personalizadas e ter vendedores promovendo seus produtos automaticamente.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA FINAL ═══ -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Pronto para transformar seu conhecimento em renda?</h2>
+      <p>Junte-se a mais de 50.000 produtores que já estão faturando com a BoostSell. Comece agora, é grátis.</p>
+      <button class="btn-cta" onclick="document.getElementById('cadastro').scrollIntoView({behavior:'smooth'})">
+        Criar minha conta grátis
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">BOOST<span style="color:var(--primary)">SELL</span></div>
+          <p class="footer-desc">A plataforma completa para criadores digitais venderem seus produtos com checkout de
+            alta conversão e área de membros.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produto</h4>
+          <ul>
+            <li><a href="#funcionalidades">Funcionalidades</a></li>
+            <li><a href="#cadastro">Criar conta</a></li>
+            <li><a href="#">Checkout Builder</a></li>
+            <li><a href="#">Área de membros</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Carreiras</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Termos de uso</a></li>
+            <li><a href="#">Privacidade</a></li>
+            <li><a href="#">LGPD</a></li>
+            <li><a href="#">Política de reembolso</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 BoostSell — Todos os direitos reservados</p>
+        <div class="footer-badges">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg> SSL Seguro</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px">
+              <rect x="1" y="4" width="22" height="16" rx="2" />
+              <path d="M1 10h22" />
+            </svg> PCI Compliant</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg> LGPD</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══ Navbar scroll effect ═══ */
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ═══ Auth tab switch ═══ */
+    function switchTab(tab) {
+      document.getElementById('form-signup').style.display = tab === 'signup' ? 'block' : 'none';
+      document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+      document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+    }
+
+    /* ═══ Cadastro ═══ */
+    async function fazerCadastro(e) {
+      e.preventDefault();
+      const nome = document.getElementById('signup-nome').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-senha').value;
+      const btn = document.getElementById('btn-signup');
+      btn.innerText = 'Criando conta...'; btn.disabled = true;
+      try {
+        const res = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nome, email, password }) });
+        const data = await res.json();
+        if (res.ok && data.success) { window.location.href = data.redirectUrl; }
+        else { alert(data.error || 'Erro ao criar conta'); btn.innerText = 'Criar minha conta grátis'; btn.disabled = false; }
+      } catch (err) { alert('Erro ao conectar com o servidor'); btn.innerText = 'Criar minha conta grátis'; btn.disabled = false; }
+    }
+
+    /* ═══ Login ═══ */
+    async function fazerLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-senha').value;
+      const btn = document.getElementById('btn-login');
+      btn.innerText = 'Entrando...'; btn.disabled = true;
+      try {
+        const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+        const data = await res.json();
+        if (res.ok && data.success) { window.location.href = data.redirectUrl; }
+        else { alert(data.error || 'Credenciais inválidas'); btn.innerText = 'Entrar no painel'; btn.disabled = false; }
+      } catch (err) { alert('Erro ao conectar com o servidor'); btn.innerText = 'Entrar no painel'; btn.disabled = false; }
+    }
+
+    /* ═══ FAQ Toggle ═══ */
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.faq-a').style.maxHeight = '0';
+      });
+      if (!isActive) {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+
+    /* ═══ Fade-in on scroll ═══ */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    /* ═══ Chart bars ═══ */
+    (function () {
+      const chart = document.getElementById('stats-chart');
+      if (!chart) return;
+      const heights = [30, 45, 35, 55, 40, 65, 50, 75, 60, 80, 55, 70, 85, 60, 90, 70, 55, 80, 65, 75];
+      heights.forEach(h => {
+        const bar = document.createElement('div');
+        bar.className = 'chart-bar';
+        bar.style.height = h + '%';
+        chart.appendChild(bar);
+      });
+    })();
+  </script>
+</body>
+
+</html>

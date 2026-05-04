@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BoostSell — Painel do Produtor</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root {
+      --primary: #F97316;
+      --primary-dark: #EA580C;
+      --primary-light: #FB923C;
+      --accent: #FF4500;
+      --dark: #0A0A0A;
+      --dark2: #141414;
+      --dark3: #1F1F1F;
+      --surface: #1A1A1A;
+      --white: #FFFFFF;
+      --gray100:#F3F4F6;--gray200:#E5E7EB;--gray300:#D1D5DB;--gray400:#9CA3AF;--gray500:#6B7280;--gray600:#4B5563;--text-dark:#111827;--text-muted:#6B7280;--gradient:linear-gradient(135deg,#F97316,#EA580C);--transition:all .3s cubic-bezier(.4,0,.2,1)}
+    body{font-family:'Inter',sans-serif;background:#F0F2F5;color:var(--text-dark);min-height:100vh;display:flex}
+
+    /* Sidebar */
+    .sidebar{width:260px;background:var(--dark);color:var(--white);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:var(--transition)}
+    .sidebar-header{padding:1.5rem;border-bottom:1px solid rgba(255,255,255,.06)}
+    .sidebar-brand{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.4rem;color:var(--white)}
+    .sidebar-sub{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:.2rem}
+    .sidebar-nav{flex:1;padding:1rem 0;overflow-y:auto}
+    .nav-group{padding:0 .75rem;margin-bottom:.5rem}
+    .nav-group-label{font-size:.65rem;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.5px;padding:.5rem .75rem}
+    .nav-item{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-radius:10px;color:rgba(255,255,255,.6);font-size:.88rem;font-weight:500;cursor:pointer;transition:var(--transition);text-decoration:none;margin-bottom:2px}
+    .nav-item:hover{background:rgba(255,255,255,.06);color:var(--white)}
+    .nav-item.active{background:rgba(249,115,22,.15);color:var(--primary);font-weight:600}
+    .nav-item .icon{width:20px;text-align:center;font-size:1rem}
+    .sidebar-footer{padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.06)}
+    .user-info{display:flex;align-items:center;gap:.6rem}
+    .user-avatar{width:36px;height:36px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:var(--white);flex-shrink:0}
+    .user-name{font-size:.82rem;font-weight:600;color:var(--white)}
+    .user-email{font-size:.7rem;color:rgba(255,255,255,.35)}
+    .btn-logout{margin-top:.75rem;width:100%;padding:.5rem;border:1px solid rgba(255,255,255,.1);border-radius:8px;background:transparent;color:rgba(255,255,255,.5);font-size:.78rem;cursor:pointer;transition:var(--transition);font-family:'Inter',sans-serif}
+    .btn-logout:hover{border-color:#ef4444;color:#ef4444}
+
+    /* Main */
+    .main{margin-left:260px;flex:1;min-height:100vh}
+    .topbar{background:var(--white);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--gray200);position:sticky;top:0;z-index:50}
+    .topbar-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.15rem;color:var(--text-dark)}
+    .topbar-right{display:flex;align-items:center;gap:1rem}
+    .mobile-menu{display:none;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text-dark)}
+
+    .content{padding:2rem}
+
+    /* Stats Cards */
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:2rem}
+    .stat-card{background:var(--white);border-radius:16px;padding:1.5rem;border:1px solid var(--gray200);transition:var(--transition);position:relative;overflow:hidden}
+    .stat-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .stat-card:nth-child(1)::after{background:var(--gradient)}
+    .stat-card:nth-child(2)::after{background:linear-gradient(135deg,#10B981,#06B6D4)}
+    .stat-card:nth-child(3)::after{background:linear-gradient(135deg,#F59E0B,#EF4444)}
+    .stat-card:nth-child(4)::after{background:linear-gradient(135deg,#EC4899,#F97316)}
+    .stat-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem}
+    .stat-card:nth-child(1) .stat-icon{background:rgba(249,115,22,.1)}
+    .stat-card:nth-child(2) .stat-icon{background:rgba(16,185,129,.1)}
+    .stat-card:nth-child(3) .stat-icon{background:rgba(245,158,11,.1)}
+    .stat-card:nth-child(4) .stat-icon{background:rgba(236,72,153,.1)}
+    .stat-card .label{font-size:.78rem;color:var(--text-muted);font-weight:500;margin-bottom:.25rem}
+    .stat-card .value{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.75rem;color:var(--text-dark)}
+
+    /* Section Card */
+    .card{background:var(--white);border-radius:16px;border:1px solid var(--gray200);overflow:hidden;margin-bottom:1.5rem}
+    .card-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--gray100);display:flex;align-items:center;justify-content:space-between}
+    .card-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text-dark)}
+    .card-body{padding:1.5rem}
+    .card-body.no-pad{padding:0}
+
+    /* Button */
+    .btn{padding:.6rem 1.25rem;border-radius:8px;font-weight:600;font-size:.85rem;cursor:pointer;transition:var(--transition);border:none;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:.4rem}
+    .btn-primary{background:var(--gradient);color:var(--white)}
+    .btn-primary:hover{box-shadow:0 4px 15px rgba(249,115,22,.3);transform:translateY(-1px)}
+    .btn-danger{background:#FEE2E2;color:#DC2626;border:1px solid #FECACA}
+    .btn-danger:hover{background:#DC2626;color:#fff}
+    .btn-sm{padding:.4rem .8rem;font-size:.78rem}
+
+    /* Product Table */
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse}
+    th{text-align:left;font-size:.75rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;padding:.75rem 1.5rem;border-bottom:1px solid var(--gray200);background:var(--gray100)}
+    td{padding:.85rem 1.5rem;border-bottom:1px solid var(--gray100);font-size:.88rem;color:var(--gray600)}
+    tr:hover td{background:rgba(249,115,22,.02)}
+    .status-badge{display:inline-flex;padding:.2rem .6rem;border-radius:20px;font-size:.72rem;font-weight:600}
+    .status-ativo{background:#D1FAE5;color:#065F46}
+    .status-inativo{background:#FEE2E2;color:#991B1B}
+    .empty-state{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
+    .empty-state .icon{font-size:3rem;margin-bottom:1rem;opacity:.5}
+    .empty-state p{font-size:.9rem;margin-bottom:1.5rem}
+
+    /* Modal */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center}
+    .modal-overlay.open{display:flex}
+    .modal{background:var(--white);border-radius:20px;width:90%;max-width:500px;box-shadow:0 25px 60px rgba(0,0,0,.2);animation:modalIn .3s ease}
+    @keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+    .modal-header{padding:1.5rem;border-bottom:1px solid var(--gray100);display:flex;align-items:center;justify-content:space-between}
+    .modal-header h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem}
+    .modal-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--gray400);transition:var(--transition)}
+    .modal-close:hover{color:var(--text-dark)}
+    .modal-body{padding:1.5rem}
+    .field{margin-bottom:1.25rem}
+    .field label{display:block;font-size:.82rem;font-weight:600;color:var(--text-dark);margin-bottom:.4rem}
+    .field input,.field select,.field textarea{width:100%;padding:.75rem 1rem;border:1px solid var(--gray300);border-radius:8px;font-size:.9rem;font-family:'Inter',sans-serif;color:var(--text-dark);outline:none;transition:var(--transition);background:var(--white)}
+    .field textarea{resize:vertical;min-height:80px}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+    .modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--gray100);display:flex;justify-content:flex-end;gap:.75rem}
+
+    /* Page hidden */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* Responsive */
+    @media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){
+      .sidebar{transform:translateX(-100%)}
+      .sidebar.open{transform:translateX(0)}
+      .main{margin-left:0}
+      .mobile-menu{display:block}
+      .stats-row{grid-template-columns:1fr}
+      .content{padding:1rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">BOOST<span style="color:var(--primary)">SELL</span></div>
+    <div class="sidebar-sub">Painel do produtor</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group">
+      <div class="nav-group-label">Principal</div>
+      <a class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">
+        <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 17V13M12 17V7M16 17V11"/></svg></span> Dashboard
+      </a>
+      <a class="nav-item" data-page="produtos" onclick="showPage('produtos')">
+        <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></span> Meus Produtos
+      </a>
+      <a class="nav-item" data-page="vendas" onclick="showPage('vendas')">
+        <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> Vendas
+      </a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Ferramentas</div>
+      <a class="nav-item" data-page="checkout" onclick="showPage('checkout')">
+        <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span> Checkout Builder
+      </a>
+      <a class="nav-item" data-page="afiliados" onclick="showPage('afiliados')">
+        <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span> Afiliados
+      </a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">Conta</div>
+      <a class="nav-item" data-page="config" onclick="showPage('config')">
+        <span class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span> Configurações
+      </a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="user-avatar" id="user-avatar">VF</div>
+      <div>
+        <div class="user-name" id="user-name">Produtor</div>
+        <div class="user-email" id="user-email">email@vendafy.com</div>
+      </div>
+    </div>
+    <button class="btn-logout" onclick="logout()">Sair da conta</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="mobile-menu" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+      <div class="topbar-title" id="page-title">Dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <a href="/" style="font-size:.82rem;color:var(--primary);text-decoration:none;font-weight:600">← Voltar ao site</a>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══ DASHBOARD PAGE ═══ -->
+    <div class="page active" id="page-dashboard">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></div>
+          <div class="label">Produtos cadastrados</div>
+          <div class="value" id="s-produtos">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div class="label">Total de vendas</div>
+          <div class="value" id="s-vendas">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M6 16h.01M10 16h.01"/></svg></div>
+          <div class="label">Receita total</div>
+          <div class="value" id="s-receita">R$ 0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></svg></div>
+          <div class="label">Produtos ativos</div>
+          <div class="value" id="s-ativos">0</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Atividade recente</div>
+        </div>
+        <div class="card-body">
+          <div class="empty-state" id="dash-empty">
+            <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/></svg></div>
+            <p>Comece cadastrando seu primeiro produto para ver suas vendas aqui!</p>
+            <button class="btn btn-primary" onclick="showPage('produtos');openModal()">Cadastrar meu primeiro produto</button>
+          </div>
+          <div id="dash-activity" style="display:none">
+            <p style="color:var(--text-muted);font-size:.88rem">Suas vendas recentes aparecerão aqui conforme você faz vendas. Continue divulgando seus links!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PRODUCTS PAGE ═══ -->
+    <div class="page" id="page-produtos">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Meus Produtos</div>
+          <button class="btn btn-primary" onclick="openModal()">+ Novo Produto</button>
+        </div>
+        <div class="card-body no-pad">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Produto</th><th>Tipo</th><th>Preço</th><th>Vendas</th><th>Status</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="products-table">
+                <tr><td colspan="6">
+                  <div class="empty-state">
+                    <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></div>
+                    <p>Nenhum produto cadastrado ainda.</p>
+                    <button class="btn btn-primary" onclick="openModal()">Cadastrar produto</button>
+                  </div>
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ VENDAS PAGE ═══ -->
+    <div class="page" id="page-vendas">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Minhas Vendas</div></div>
+        <div class="card-body">
+          <div class="empty-state">
+            <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+            <p>Suas vendas aparecerão aqui quando compradores adquirirem seus produtos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CHECKOUT PAGE ═══ -->
+    <div class="page" id="page-checkout">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Checkout Builder</div></div>
+        <div class="card-body">
+          <div class="empty-state">
+            <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
+            <p>O Checkout Builder estará disponível em breve. Personalize sua página de vendas com arrasta e solta!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ AFILIADOS PAGE ═══ -->
+    <div class="page" id="page-afiliados">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Programa de Afiliados</div></div>
+        <div class="card-body">
+          <div class="empty-state">
+            <div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <p>O programa de afiliados estará disponível em breve. Crie seu exército de vendedores!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CONFIG PAGE ═══ -->
+    <div class="page" id="page-config">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Configurações da Conta</div></div>
+        <div class="card-body">
+          <div class="field">
+            <label>Nome</label>
+            <input type="text" id="cfg-nome" disabled>
+          </div>
+          <div class="field">
+            <label>E-mail</label>
+            <input type="email" id="cfg-email" disabled>
+          </div>
+          <p style="font-size:.82rem;color:var(--text-muted);margin-top:1rem">Para alterar seus dados, entre em contato com o suporte.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL NOVO PRODUTO -->
+<div class="modal-overlay" id="modal-product">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Novo Produto</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Nome do produto *</label>
+        <input type="text" id="prod-nome" placeholder="Ex: Curso de Marketing Digital">
+      </div>
+      <div class="field">
+        <label>Descrição</label>
+        <textarea id="prod-desc" placeholder="Descreva seu produto..."></textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="field">
+          <label>Preço (R$) *</label>
+          <input type="number" id="prod-preco" placeholder="97.00" step="0.01" min="0">
+        </div>
+        <div class="field">
+          <label>Tipo</label>
+          <select id="prod-tipo">
+            <option value="curso">Curso online</option>
+            <option value="ebook">E-book</option>
+            <option value="mentoria">Mentoria</option>
+            <option value="template">Template</option>
+            <option value="software">Software</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="background:var(--gray100);color:var(--gray600)" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="criarProduto()">Cadastrar produto</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// === PAGE NAVIGATION ===
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector(`[data-page="${page}"]`).classList.add('active');
+  const titles = { dashboard: 'Dashboard', produtos: 'Meus Produtos', vendas: 'Vendas', checkout: 'Checkout Builder', afiliados: 'Afiliados', config: 'Configurações' };
+  document.getElementById('page-title').textContent = titles[page] || 'Dashboard';
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+// === MODAL ===
+function openModal() { document.getElementById('modal-product').classList.add('open'); }
+function closeModal() { document.getElementById('modal-product').classList.remove('open'); document.getElementById('prod-nome').value = ''; document.getElementById('prod-desc').value = ''; document.getElementById('prod-preco').value = ''; }
+
+// === LOAD USER DATA ===
+async function loadUser() {
+  try {
+    const res = await fetch('/api/me');
+    if (!res.ok) { window.location.href = '/'; return; }
+    const data = await res.json();
+    document.getElementById('user-name').textContent = data.nome || data.email.split('@')[0];
+    document.getElementById('user-email').textContent = data.email;
+    document.getElementById('user-avatar').textContent = (data.nome || data.email).substring(0, 2).toUpperCase();
+    document.getElementById('cfg-nome').value = data.nome || '';
+    document.getElementById('cfg-email').value = data.email || '';
+  } catch (e) { window.location.href = '/'; }
+}
+
+// === LOAD DASHBOARD STATS ===
+async function loadDashboard() {
+  try {
+    const res = await fetch('/api/dashboard');
+    const data = await res.json();
+    document.getElementById('s-produtos').textContent = data.totalProdutos;
+    document.getElementById('s-vendas').textContent = data.totalVendas;
+    document.getElementById('s-receita').textContent = 'R$ ' + data.receitaTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    document.getElementById('s-ativos').textContent = data.produtosAtivos;
+    if (data.totalProdutos > 0) {
+      document.getElementById('dash-empty').style.display = 'none';
+      document.getElementById('dash-activity').style.display = 'block';
+    }
+  } catch (e) { console.error(e); }
+}
+
+// === LOAD PRODUCTS ===
+async function loadProducts() {
+  try {
+    const res = await fetch('/api/products');
+    const products = await res.json();
+    const tbody = document.getElementById('products-table');
+    if (products.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><div class="icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></div><p>Nenhum produto cadastrado ainda.</p><button class="btn btn-primary" onclick="openModal()">Cadastrar produto</button></div></td></tr>`;
+      return;
+    }
+    const tipos = { curso: 'Curso', ebook: 'E-book', mentoria: 'Mentoria', template: 'Template', software: 'Software', outro: 'Outro' };
+    tbody.innerHTML = products.map(p => `
+      <tr>
+        <td style="font-weight:600;color:var(--text-dark)">${p.nome}</td>
+        <td>${tipos[p.tipo] || p.tipo}</td>
+        <td>R$ ${parseFloat(p.preco).toFixed(2)}</td>
+        <td>${p.vendas}</td>
+        <td><span class="status-badge status-${p.status}">${p.status === 'ativo' ? 'Ativo' : 'Inativo'}</span></td>
+        <td><button class="btn btn-danger btn-sm" onclick="deletarProduto(${p.id})">Excluir</button></td>
+      </tr>
+    `).join('');
+  } catch (e) { console.error(e); }
+}
+
+// === CREATE PRODUCT ===
+async function criarProduto() {
+  const nome = document.getElementById('prod-nome').value;
+  const descricao = document.getElementById('prod-desc').value;
+  const preco = document.getElementById('prod-preco').value;
+  const tipo = document.getElementById('prod-tipo').value;
+  if (!nome || !preco) { alert('Nome e preço são obrigatórios!'); return; }
+  try {
+    const res = await fetch('/api/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nome, descricao, preco, tipo }) });
+    const data = await res.json();
+    if (data.success) { closeModal(); loadProducts(); loadDashboard(); }
+    else alert(data.error || 'Erro ao criar produto.');
+  } catch (e) { alert('Erro ao conectar.'); }
+}
+
+// === DELETE PRODUCT ===
+async function deletarProduto(id) {
+  if (!confirm('Tem certeza que deseja excluir este produto?')) return;
+  try {
+    const res = await fetch('/api/products/' + id, { method: 'DELETE' });
+    const data = await res.json();
+    if (data.success) { loadProducts(); loadDashboard(); }
+  } catch (e) { alert('Erro ao excluir.'); }
+}
+
+// === LOGOUT ===
+async function logout() {
+  await fetch('/api/logout', { method: 'POST' });
+  window.location.href = '/';
+}
+
+// === INIT ===
+loadUser();
+loadDashboard();
+loadProducts();
+</script>
+</body>
+</html>
