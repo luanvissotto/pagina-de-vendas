@@ -162,6 +162,52 @@ app.get('/api/dashboard', (req, res) => {
         res.json({ totalProdutos: total, produtosAtivos: ativos, totalVendas: vendas, receitaTotal: receita });
     });
 });
+// Platform Global Stats (Landing Page)
+app.get('/api/platform-stats', (req, res) => {
+    db.serialize(() => {
+        db.get('SELECT COUNT(*) as totalUsers FROM users', (err, usersRow) => {
+            if (err) return res.status(500).json({ error: 'Erro no servidor' });
+            
+            db.get('SELECT COUNT(*) as totalProducts, SUM(vendas) as totalSales, SUM(vendas * preco) as totalRevenue FROM products WHERE status = "ativo"', (err, prodRow) => {
+                if (err) return res.status(500).json({ error: 'Erro no servidor' });
+                
+                res.json({
+                    users: usersRow ? usersRow.totalUsers : 0,
+                    products: prodRow ? (prodRow.totalProducts || 0) : 0,
+                    sales: prodRow ? (prodRow.totalSales || 0) : 0,
+                    revenue: prodRow ? (prodRow.totalRevenue || 0) : 0
+                });
+            });
+        });
+    });
+});
+
+// Loja de Produtos (Marketplace)
+app.get('/api/store-products', (req, res) => {
+    if (!req.session.userId) return res.status(401).json({ error: 'Não autenticado' });
+    const query = `
+        SELECT p.*, u.nome as produtor_nome 
+        FROM products p 
+        JOIN users u ON p.user_id = u.id 
+        WHERE p.status = 'ativo' 
+        ORDER BY p.created_at DESC
+    `;
+    db.all(query, [], (err, rows) => {
+        if (err) return res.status(500).json({ error: 'Erro ao buscar produtos da loja.' });
+        res.json(rows || []);
+    });
+});
+
+// Simular Compra de Produto na Loja
+app.post('/api/store/buy/:id', (req, res) => {
+    if (!req.session.userId) return res.status(401).json({ error: 'Não autenticado' });
+    const productId = req.params.id;
+    db.run('UPDATE products SET vendas = vendas + 1 WHERE id = ? AND status = "ativo"', [productId], function(err) {
+        if (err) return res.status(500).json({ error: 'Erro na compra' });
+        if (this.changes === 0) return res.status(404).json({ error: 'Produto não encontrado ou inativo.' });
+        res.json({ success: true });
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`✨ VENDAFY rodando em http://localhost:${PORT}`);

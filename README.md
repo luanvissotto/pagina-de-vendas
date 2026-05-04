@@ -1,13 +1,12 @@
 # BoostSell
 
-BoostSell (anteriormente VENDAFY) é uma plataforma moderna e responsiva de vendas para produtos digitais. 
+BoostSell é uma plataforma moderna e responsiva de vendas para produtos digitais. 
 
 ## 🚀 Funcionalidades
 
 - **Página de Vendas (Landing Page)**: Design atraente e de alta conversão, focado em dispositivos móveis (Mobile-first).
 - **Dashboard**: Painel de administração e de cliente para gerenciamento de produtos e vendas.
 - **Autenticação**: Sistema seguro de login (E-mail e Senha) com níveis de acesso.
-- **Integração de Pagamentos e Contratos**: Suporte para Pix integrado e geração automática de contratos em PDF.
 
 ## 🛠️ Tecnologias Utilizadas
 

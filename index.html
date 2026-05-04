@@ -21,7 +21,6 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#como-funciona">Como funciona</a></li>
         <li><a href="#funcionalidades">Funcionalidades</a></li>
-        <li><a href="#depoimentos">Depoimentos</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <a href="#cadastro" class="nav-cta">Criar conta grátis</a>
@@ -34,7 +33,7 @@
   <section class="hero" id="home">
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-badge"><span class="dot"></span> Plataforma #1 do Brasil</div>
+        <div class="hero-badge"><span class="dot"></span> Comece agora mesmo</div>
         <h1>Venda seus <span class="highlight">produtos digitais</span> sem complicação</h1>
         <p class="hero-sub">Crie sua loja, configure seu checkout de alta conversão e receba pagamentos via PIX, cartão
           e boleto. Tudo em um único lugar.</p>
@@ -83,20 +82,20 @@
             <div class="stats-live"><span class="dot"></span> Ao vivo</div>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Vendas hoje</span>
-            <span class="stat-value green" id="vendas-hoje">R$ 12.480</span>
+            <span class="stat-label">Volume de Vendas</span>
+            <span class="stat-value green" id="hero-vendas">R$ 0,00</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Conversão</span>
-            <span class="stat-value purple">8.7%</span>
+            <span class="stat-label">Vendas Realizadas</span>
+            <span class="stat-value purple" id="hero-qtd-vendas">0</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Produtos ativos</span>
-            <span class="stat-value">34</span>
+            <span class="stat-label">Produtos Ativos</span>
+            <span class="stat-value" id="hero-produtos">0</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Alunos</span>
-            <span class="stat-value">2.841</span>
+            <span class="stat-label">Produtores</span>
+            <span class="stat-value" id="hero-produtores">0</span>
           </div>
           <div class="stats-chart" id="stats-chart"></div>
         </div>
@@ -104,30 +103,7 @@
     </div>
   </section>
 
-  <!-- ═══ SOCIAL PROOF ═══ -->
-  <section class="social-proof">
-    <div class="social-proof-inner">
-      <div class="proof-stat fade-up">
-        <div class="proof-num" data-target="50000" data-prefix="">50.000+</div>
-        <div class="proof-label">Produtores ativos</div>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat fade-up">
-        <div class="proof-num">R$ 200M+</div>
-        <div class="proof-label">Em vendas processadas</div>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat fade-up">
-        <div class="proof-num">99.9%</div>
-        <div class="proof-label">Uptime garantido</div>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-stat fade-up">
-        <div class="proof-num">4.9 ★</div>
-        <div class="proof-label">Avaliação dos clientes</div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ═══ COMO FUNCIONA ═══ -->
   <section class="how-it-works" id="como-funciona">
@@ -237,60 +213,6 @@
     </div>
   </section>
 
-  <!-- ═══ DEPOIMENTOS ═══ -->
-  <section class="testimonials" id="depoimentos">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-          </svg> Depoimentos</div>
-        <h2 class="section-title">Quem usa, recomenda</h2>
-        <p class="section-sub">Veja o que nossos produtores falam sobre a experiência com a BoostSell.</p>
-      </div>
-      <div class="test-grid">
-        <div class="test-card fade-up">
-          <div class="test-stars" style="color:var(--primary)">★★★★★</div>
-          <p class="test-text">"Migrei da concorrência e minhas vendas aumentaram 40%. O checkout é absurdamente bom e a
-            taxa de conversão subiu muito."</p>
-          <div class="test-author">
-            <div class="test-avatar">RL</div>
-            <div>
-              <div class="test-name">Rafael Lima</div>
-              <div class="test-role">Produtor de cursos online</div>
-              <div class="test-result">+R$ 85.000/mês em vendas</div>
-            </div>
-          </div>
-        </div>
-        <div class="test-card fade-up">
-          <div class="test-stars" style="color:var(--primary)">★★★★★</div>
-          <p class="test-text">"A área de membros é impecável. Meus alunos amam a experiência e o suporte da BoostSell é
-            incrível. Recomendo!"</p>
-          <div class="test-author">
-            <div class="test-avatar">CS</div>
-            <div>
-              <div class="test-name">Camila Santos</div>
-              <div class="test-role">Mentora de negócios</div>
-              <div class="test-result">+2.300 alunos ativos</div>
-            </div>
-          </div>
-        </div>
-        <div class="test-card fade-up">
-          <div class="test-stars" style="color:var(--primary)">★★★★★</div>
-          <p class="test-text">"O programa de afiliados mudou meu jogo. Tenho mais de 200 afiliados vendendo meu curso
-            todos os dias. É impressionante."</p>
-          <div class="test-author">
-            <div class="test-avatar">MA</div>
-            <div>
-              <div class="test-name">Marcos Almeida</div>
-              <div class="test-role">Infoprodutor</div>
-              <div class="test-result">+R$ 150.000/mês em vendas</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ═══ CADASTRO / LOGIN ═══ -->
   <section class="signup-section" id="cadastro">
@@ -437,7 +359,7 @@
   <section class="cta-section">
     <div class="cta-content">
       <h2>Pronto para transformar seu conhecimento em renda?</h2>
-      <p>Junte-se a mais de 50.000 produtores que já estão faturando com a BoostSell. Comece agora, é grátis.</p>
+      <p>Comece a vender seus produtos digitais com a BoostSell hoje mesmo. É rápido, seguro e gratuito para começar.</p>
       <button class="btn-cta" onclick="document.getElementById('cadastro').scrollIntoView({behavior:'smooth'})">
         Criar minha conta grátis
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -567,12 +489,46 @@
       }
     }
 
+    /* ═══ Fetch live platform stats ═══ */
+    async function fetchPlatformStats() {
+      try {
+        const res = await fetch('/api/platform-stats');
+        const data = await res.json();
+        
+        const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+        
+        document.getElementById('hero-vendas').innerText = formatter.format(data.revenue);
+        document.getElementById('hero-qtd-vendas').innerText = data.sales.toLocaleString('pt-BR');
+        document.getElementById('hero-produtos').innerText = data.products.toLocaleString('pt-BR');
+        document.getElementById('hero-produtores').innerText = data.users.toLocaleString('pt-BR');
+      } catch (err) {
+        console.error('Erro ao buscar status ao vivo da plataforma:', err);
+      }
+    }
+    
+    // Atualiza imediatamente e depois a cada 10 segundos
+    fetchPlatformStats();
+    setInterval(fetchPlatformStats, 10000);
+
     /* ═══ Fade-in on scroll ═══ */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
+        if (e.isIntersecting) { 
+          e.target.classList.add('visible'); 
+          observer.unobserve(e.target);
+        }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    // Selecionar os elementos principais do site para animar fluidamente
+    const animElements = document.querySelectorAll('.hero-content, .stats-card, .proof-stat, .section-header, .step-card, .feat-card, .test-card, .signup-info, .signup-box, .faq-item, .cta-content');
+    
+    animElements.forEach((el, index) => {
+      el.classList.add('fade-up');
+      observer.observe(el);
+    });
+
+    // Observar elementos que já possuam a classe fade-up diretamente no HTML
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     /* ═══ Chart bars ═══ */
