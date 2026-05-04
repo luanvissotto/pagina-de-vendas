@@ -19,7 +19,7 @@ BoostSell é uma plataforma moderna e responsiva de vendas para produtos digitai
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+   git clone https://github.com/luanvissotto/pagina-de-vendas.git
    ```
 2. Instale as dependências:
    ```bash
